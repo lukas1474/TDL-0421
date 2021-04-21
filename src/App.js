@@ -1,21 +1,26 @@
-function App() {
+import React from 'react';
+import PropTypes from 'prop-types';
+
+import { ThemeProvider } from 'theme-ui';
+import theme from './theme';
+
+import MainLayout from './components/layout/MainLayout/MainLayout';
+import MainPage from './components/views/MainPage/MainPage';
+
+const App = ({children}) => {
   return (
     <div className="App">
-      <header className="App-header">
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <ThemeProvider theme={theme}>
+        <MainLayout>
+          <MainPage />
+        </MainLayout>
+      </ThemeProvider>
     </div>
   );
-}
+};
+
+App.propTypes = {
+  children: PropTypes.node,
+};
 
 export default App;

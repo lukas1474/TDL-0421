@@ -2,23 +2,24 @@ import React from 'react';
 
 /** @jsxImportSource theme-ui */
 
-const Header = () => (
-  <header
+const Footer = () => (
+  <footer
     sx={{
       backgroundColor: `background`,
-      height: `12vh`,
+      height: `5vh`,
       display: `flex`,
       alignItems: `center`,
       justifyContent: `center`,
     }}>
-    <h2
+    <p
       sx={{
-        fontSize: `calc(15px + 2vmin)`,
+        margin: `5px`,
+        fontSize: `calc(12px + 2vmin)`,
         color: `white`,
-      }}>
-      Lista TODO
-    </h2>
-  </header>
+        alignItems: `center`,
+      }}
+    >2021</p>
+  </footer>
 );
 
-export default Header;
+export default Footer;
