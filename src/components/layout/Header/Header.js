@@ -18,7 +18,6 @@ const Header = () => (
       gap={2}
       columns={[2, `1fr 2fr`]}
       sx={{
-        // border: `1px solid red`,
         width: `1500px`,
         display: `flex`,
         flexDirection: `flex-end`,

@@ -6,6 +6,8 @@ import { Grid, Box, Button, Checkbox, Label } from 'theme-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
+import { Link } from 'react-router-dom';
+
 const MainPage = () => {
   return(
     <div
@@ -26,9 +28,11 @@ const MainPage = () => {
           display: `flex`,
           justifyContent: `flex-end`,
         }}>
-        <Button variant='third'>
-         Dodaj
-        </Button>
+        <Link to='/AddNew'>
+          <Button variant='third'>
+            Dodaj
+          </Button>
+        </Link>
       </Box>
       <Grid
         width={[128, null, 192]}
