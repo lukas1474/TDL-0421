@@ -2,6 +2,9 @@ import React from 'react';
 
 /** @jsxImportSource theme-ui */
 
+import Search from '../../features/Search/Search';
+import { Grid, Box } from 'theme-ui';
+
 const Header = () => (
   <header
     sx={{
@@ -11,13 +14,32 @@ const Header = () => (
       alignItems: `center`,
       justifyContent: `center`,
     }}>
-    <h2
+    <Grid
+      gap={2}
+      columns={[2, `1fr 2fr`]}
       sx={{
-        fontSize: `calc(15px + 2vmin)`,
-        color: `white`,
+        // border: `1px solid red`,
+        width: `1500px`,
+        display: `flex`,
+        flexDirection: `flex-end`,
+        alignItems: `center`,
+        margin: `10px`,
       }}>
-      Lista TODO
-    </h2>
+      <Box>
+        <Search />
+      </Box>
+      <Box>
+        <h2
+          sx={{
+            fontSize: `calc(15px + 2vmin)`,
+            color: `white`,
+            marginLeft: `300px`,
+          }}>
+          Lista TODO
+        </h2>
+      </Box>
+    </Grid>
+
   </header>
 );
 

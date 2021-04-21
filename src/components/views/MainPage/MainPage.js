@@ -2,7 +2,7 @@ import React from 'react';
 
 /** @jsxImportSource theme-ui */
 
-import { Grid, Box, Close, Button, Checkbox, Label } from 'theme-ui';
+import { Grid, Box, Button, Checkbox, Label } from 'theme-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
@@ -10,7 +10,7 @@ const MainPage = () => {
   return(
     <div
       sx={{
-        background: `white`,
+        backgroundColor: `backgroundList`,
         display: `flex`,
         flexDirection: `column`,
         position: `center`,
