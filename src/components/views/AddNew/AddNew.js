@@ -4,10 +4,9 @@ import React from 'react';
 
 import { Box, Button, Label, Input, Textarea, Container } from 'theme-ui';
 import { Link } from 'react-router-dom';
-// import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 const MainPage = () => {
+
   return(
     <div
       sx={{
@@ -31,6 +30,7 @@ const MainPage = () => {
           alignItems: `center`,
           width: `500px`,
           color: `black`,
+          fontFamily: `body`,
         }}>
         <Box
           sx={{

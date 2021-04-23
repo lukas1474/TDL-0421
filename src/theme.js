@@ -21,6 +21,10 @@ export default {
     primary: {
       color: `buttonText`,
       fontSize: `20px`,
+      fontFamily: `body`,
+      Width: `55px`,
+      Height: `55px`,
+      // height: `100%`,
       cursor: `pointer`,
       bg: `background`,
       '&:hover': {
@@ -30,12 +34,16 @@ export default {
     secondary: {
       color: `buttonText`,
       fontSize: `20px`,
+      Width: `50px`,
+      Height: `50px`,
+      // height: `100%`,
       cursor: `pointer`,
       bg: `secondary`,
     },
     third: {
       color: `buttonText`,
       fontSize: `20px`,
+      fontFamily: `body`,
       cursor: `pointer`,
       bg: `new`,
     },

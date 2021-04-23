@@ -15,6 +15,7 @@ const Footer = () => (
       sx={{
         margin: `5px`,
         fontSize: `calc(12px + 2vmin)`,
+        fontFamily: `heading`,
         color: `white`,
         alignItems: `center`,
       }}

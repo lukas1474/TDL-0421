@@ -33,6 +33,7 @@ const Header = () => (
             fontSize: `calc(15px + 2vmin)`,
             color: `white`,
             marginLeft: `300px`,
+            fontFamily: `heading`,
           }}>
           Lista TODO
         </h2>

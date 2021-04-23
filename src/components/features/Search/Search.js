@@ -22,6 +22,7 @@ const Search = () => (
         flexDirection: `row`,
         position: `center`,
         alignItems: `center`,
+        fontFamily: `body`,
       }}
     >
       <Input defaultValue=""
