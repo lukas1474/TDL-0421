@@ -1,5 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from 'react';
+import { useRecoilValue  } from 'recoil';
+
+import { todosList } from '../../../atoms';
 
 /** @jsxImportSource theme-ui */
 
@@ -11,20 +13,9 @@ import { Link } from 'react-router-dom';
 
 const MainPage = () => {
 
-  const [todos, setTodos] = useState([]);
+  // const [ todos, setTodos ] = useRecoilState(todosList);
 
-  console.log(`mapowanie`, todos);
-
-  useEffect(async () => {
-    const fetchData = async () => {
-      const result = await axios(
-        `https://gorest.co.in/public-api/todos`,
-      );
-      setTodos(result.data);
-      console.log(result.data);
-    };
-    fetchData();
-  }, []);
+  const todos = useRecoilValue(todosList);
 
   return(
     <div

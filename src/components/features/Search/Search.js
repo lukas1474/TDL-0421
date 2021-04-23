@@ -13,6 +13,7 @@ const Search = () => (
         color: `text`,
         marginBottom: `5px`,
         marginLeft: `10px`,
+        fontFamily: `heading`,
       }}
     >
       Wyszukaj</Label>
@@ -22,7 +23,6 @@ const Search = () => (
         flexDirection: `row`,
         position: `center`,
         alignItems: `center`,
-        fontFamily: `body`,
       }}
     >
       <Input defaultValue=""

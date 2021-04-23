@@ -5,7 +5,7 @@ import React from 'react';
 import { Box, Button, Label, Input, Textarea, Container } from 'theme-ui';
 import { Link } from 'react-router-dom';
 
-const MainPage = () => {
+const AddNew = () => {
 
   return(
     <div
@@ -53,8 +53,6 @@ const MainPage = () => {
           }}>
           <Label htmlFor="tytuł">Tytuł</Label>
           <Input name="tytuł" mb={3} />
-          <Label htmlFor="treść">Treść</Label>
-          <Textarea name="treść" rows={6} mb={3} />
           <Button variant='third'>Dodaj</Button>
         </Box>
       </Container>
@@ -62,4 +60,4 @@ const MainPage = () => {
   );
 };
 
-export default MainPage;
+export default AddNew;
