@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { useRecoilValue  } from 'recoil';
 
 import { todosList } from '../../../atoms';
@@ -13,9 +14,9 @@ import { Link } from 'react-router-dom';
 
 const MainPage = () => {
 
-  // const [ todos, setTodos ] = useRecoilState(todosList);
-
   const todos = useRecoilValue(todosList);
+
+  console.log(`todos`, todos);
 
   return(
     <div
@@ -44,7 +45,7 @@ const MainPage = () => {
       </Box>
       {todos.data && todos.data.map(item => (
         <Grid
-
+          key={item.id}
           sx={{
             backgroundColor: `muted`,
             display: `flex`,
@@ -61,12 +62,20 @@ const MainPage = () => {
                 <Checkbox defaultChecked={false} />
               </Label>
             </Box>
-            <Box
-              sx={{
-                width: `1000px`,
-              }}>
-              {item.title}
-            </Box>
+            <Link to={`/${item.id}`}>
+              <Box
+                sx={{
+                  width: `1000px`,
+                }}>
+                {item.title}
+              </Box>
+              {/* {(props) => (
+                <Details
+                  {...props}
+                  key={this.props.id}
+                />
+              )} */}
+            </Link>
             <Box
               sx={{
                 display: `flex`,
@@ -76,7 +85,10 @@ const MainPage = () => {
               <Button variant='secondary' mr={2}>
                 <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
               </Button>
-              <Button variant='primary'>
+              <Button
+                variant='primary'
+                onClick={() => remove(item.id)}
+              >
                 <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
               </Button>
             </Box>

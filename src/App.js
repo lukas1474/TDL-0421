@@ -9,6 +9,7 @@ import { BrowserRouter, Switch, Route } from 'react-router-dom';
 import MainLayout from './components/layout/MainLayout/MainLayout';
 import MainPage from './components/views/MainPage/MainPage';
 import AddNew from './components/views/AddNew/AddNew';
+import Details from './components/views/Details/Details';
 
 
 const App = ({children}) => {
@@ -22,6 +23,7 @@ const App = ({children}) => {
                 <Switch>
                   <Route exact path='/' component={MainPage} />
                   <Route exact path='/AddNew' component={AddNew} />
+                  <Route exact path='/:id' component={Details} />
                 </Switch>
               </MainLayout>
             </BrowserRouter>
