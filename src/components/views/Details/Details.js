@@ -6,9 +6,11 @@ import PropTypes from 'prop-types';
 import { Box, Button, Label, Input, Container, Text } from 'theme-ui';
 import { Link } from 'react-router-dom';
 
-const AddNew = () => {
+const Details = (todos) => {
 
-  const { id, title } = this.props;
+  // const { todos } = this.props;
+
+  console.log(`item`, todos);
 
   return(
     <div
@@ -60,7 +62,7 @@ const AddNew = () => {
               fontSize: 4,
               fontWeight: `bold`,
             }}>
-            {title}
+            {/* {item.title} */}
           </Text>
         </Box>
       </Container>
@@ -74,4 +76,4 @@ const AddNew = () => {
 //   title: PropTypes.object,
 // };
 
-export default AddNew;
+export default Details;

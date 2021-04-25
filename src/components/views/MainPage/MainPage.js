@@ -1,8 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import PropTypes from 'prop-types';
-import { useRecoilValue  } from 'recoil';
+import { useRecoilState, useRecoilValue, useSetRecoilState, atom } from 'recoil';
 
-import { todosList } from '../../../atoms';
+import {  todosState } from '../../../atoms';
 
 /** @jsxImportSource theme-ui */
 
@@ -12,11 +13,41 @@ import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import { Link } from 'react-router-dom';
 
+import Details from '../Details/Details';
+
+// const todosState = atom({
+//   key: `todos`,
+//   default: [],
+// });
+
 const MainPage = () => {
+  const setTodos = useSetRecoilState(todosState);
+  const todos = useRecoilValue(todosState);
+  const setTodoList = useSetRecoilState(todosState);
 
-  const todos = useRecoilValue(todosList);
+  console.log(`lista`, todos);
 
-  console.log(`todos`, todos);
+  useEffect(async () => {
+    const getTodos = async () => {
+      const result = await axios(
+        `https://gorest.co.in/public-api/todos`,
+      );
+      setTodos(result.data);
+      // console.log(`result`, result.data);
+    };
+    getTodos();
+  }, []);
+
+  const deleteTodo = (id) => {
+    setTodoList((oldTodoList) => {
+      const newTodoList = oldTodoList.filter((todo, i) => {
+        return i !== id;
+      });
+      return newTodoList;
+    });
+  };
+
+  // console.log(`todos`, todos);
 
   return(
     <div
@@ -59,22 +90,26 @@ const MainPage = () => {
                 width: `25px`,
               }}>
               <Label>
-                <Checkbox defaultChecked={false} />
+                <Checkbox defaultChecked={item.completed} />
               </Label>
             </Box>
-            <Link to={`/${item.id}`}>
+            <Link to={`/${item.id}`} >
               <Box
                 sx={{
                   width: `1000px`,
                 }}>
                 {item.title}
+                {/* {console.log(`todos tex`, todos.title)} */}
               </Box>
-              {/* {(props) => (
+              {() => {
                 <Details
-                  {...props}
-                  key={this.props.id}
-                />
-              )} */}
+                  todos={item}
+                  // {...todos}
+                  // {...item}
+                  // key={item.id}
+                  // title={item.title}
+                />;
+              }}
             </Link>
             <Box
               sx={{
@@ -87,7 +122,7 @@ const MainPage = () => {
               </Button>
               <Button
                 variant='primary'
-                onClick={() => remove(item.id)}
+                onClick={() => deleteTodo(item.id)}
               >
                 <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
               </Button>

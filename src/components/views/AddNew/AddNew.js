@@ -1,81 +1,90 @@
 import React, { useState }from 'react';
-import axios from 'axios';
-
-import { goRestApiKey } from '../../../config';
-// import { AddTodo } from '../../../atoms';
 
 /** @jsxImportSource theme-ui */
 
 import { Box, Button, Label, Input, Container } from 'theme-ui';
 import { Link } from 'react-router-dom';
-import { useRecoilCallback, atom } from 'recoil';
+import { useRecoilState, useSetRecoilState, atom } from 'recoil';
+import {  titleState, todosState } from '../../../atoms';
 
-axios.interceptors.request.use(
-  config => {
-    config.headers.authorization = `Bearer ${goRestApiKey}`;
-    return config;
-  },
-  error => {
-    return Promise.reject(error);
-  }
-);
-
-// export const AddTodo = useRecoilCallback(({set}) => async params => {
-//   const response = await axios.post(
-//     `https://gorest.co.in/public-api/users/1745/todos?access-token=${goRestApiKey}`,
-//     todoData,
-//   ).then(response => {
-//     console.log(response);
-//   });
-//   set(response.data);
-// });
-
-// const newTodo = atom({
-//   key: `newTodo`,
-//   default: {
-//     title: ``,
-//     completed: false,
-//   },
-
-// });
-// console.log(newTodo.default);
+let id = 0;
+const getId = () => {
+  return id++;
+};
 
 const AddNew = () => {
 
-  const [title, setTitle] = useState(``);
-  // const todos = useRecoilValue(todosList);
+  const [title, setTitle] = useRecoilState(titleState);
+  const setTodoList = useSetRecoilState(todosState);
+  // const updateTodo = useSetRecoilState(todo);
 
-  // const AddTodo = useRecoilCallback(({set}) => async params => {
-  //   const response = await axios.post(
-  //     `https://gorest.co.in/public-api/users/1745/todos?access-token=${goRestApiKey}`,
-  //     newTodo,
-  //   ).then(response => {
-  //     console.log(`addtodo`, response);
-  //   });
-  //   set(newTodo, title, response.data);
-  // });
+  const onChange = (event) => {
+    setTitle(event.target.value);
+  };
 
-
-  const AddTodo = event => {
+  const addTodo = (event) => {
     event.preventDefault();
-
-    const todoData = {
-      title,
-      user_id: ``,
-      name: `Borys`,
-      email: `borys@borys.com`,
-      completed: false,
-      gender: `Male`,
-      status: `Active`,
-    };
-
-    axios.post(
-      `https://gorest.co.in/public-api/users/1331/todos?access-token=${goRestApiKey}`,
-      todoData,
-    ).then(response => {
-      console.log(response);
+    if (!title.length) return;
+    setTodoList((oldTodoList) => {
+      const newTodoList = [
+        ...oldTodoList,
+        {
+          id: getId(),
+          title,
+          completed: false,
+        },
+      ];
+      return newTodoList;
     });
   };
+
+  // const addTodo = (event) => {
+  //   event.preventDefault();
+  // if (!title.length) return;
+  //   setTodoList((oldTodoList) => [
+
+  //     ...oldTodoList,
+  //     {
+  //       id: getId(),
+  //       title,
+  //       completed: false,
+  //     },
+
+
+  //   ]);
+  //   handleClose();
+  // };
+
+
+  // const addValue = () => {
+  //   setTitle(``);
+  //   updateTodo((oldList) => [
+  //     ...oldList,
+  //     {
+  //       id: getId(),
+  //       value: title,
+  //     },
+  //   ]);
+  //   console.log(`old list`, oldList);
+  // };
+
+
+  // const addTodo = () => {
+  //   setTodoList((oldTodoList) => [
+  //     ...oldTodoList,
+  //     {
+  //       id: getId(),
+  //       text: title,
+  //       completed: false,
+  //     },
+  //   ]);
+  //   setTitle(``);
+  // };
+
+  // const onChange = ({ target: {title} }) => {
+  //   setTitle(title);
+  //   console.log(`title`, title);
+  // };
 
   return(
     <div
@@ -119,7 +128,7 @@ const AddNew = () => {
         {/* <form onSubmit={handleSubmit(onSubmit)}> */}
         <Box
           as="form"
-          onSubmit={AddTodo}
+          // onSubmit={AddTodo}
           sx={{
             marginBottom: `25px`,
           }}>
@@ -127,12 +136,18 @@ const AddNew = () => {
             Tytuł
           </Label>
           <Input
+            type='text'
             name='title'
             mb={3}
             value={title}
-            onChange={(event) => setTitle(event.target.value)}
+            // onChange={event => setTitle(event.target.value)}
+            onChange={onChange}
           />
-          <Button variant='third' type='submit'>
+          <Button
+            variant='third'
+            onClick={() => addTodo()}
+            // onClick={() => addValue()}
+          >
             Dodaj
           </Button>
         </Box>
