@@ -4,7 +4,7 @@ import React, { useState }from 'react';
 
 import { Box, Button, Label, Input, Container } from 'theme-ui';
 import { Link } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState, atom } from 'recoil';
+import { useRecoilState, useSetRecoilState, atom, useRecoilValue } from 'recoil';
 import {  titleState, todosState } from '../../../atoms';
 
 let id = 0;
@@ -16,24 +16,27 @@ const AddNew = () => {
 
   const [title, setTitle] = useRecoilState(titleState);
   const setTodoList = useSetRecoilState(todosState);
+  const oldTodoList = useRecoilValue(todosState);
   // const updateTodo = useSetRecoilState(todo);
 
   const onChange = (event) => {
     setTitle(event.target.value);
   };
+  {console.log(`asd3eqw`, oldTodoList);}
 
-  const addTodo = (event) => {
-    event.preventDefault();
+  const addTodo = (oldTodoList) => {
+    // event.preventDefault();
     if (!title.length) return;
     setTodoList((oldTodoList) => {
       const newTodoList = [
-        ...oldTodoList,
+        ...oldTodoList.data,
         {
           id: getId(),
           title,
           completed: false,
         },
       ];
+      console.log(`stara lista`, newTodoList);
       return newTodoList;
     });
   };
@@ -120,7 +123,10 @@ const AddNew = () => {
             marginTop: `25px`,
           }}>
           <Link to='/'>
-            <Button variant='primary'>
+            <Button
+              variant='primary'
+              type='button'
+            >
             Powrót
             </Button>
           </Link>
@@ -145,6 +151,7 @@ const AddNew = () => {
           />
           <Button
             variant='third'
+            type='button'
             onClick={() => addTodo()}
             // onClick={() => addValue()}
           >

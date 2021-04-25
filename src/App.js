@@ -21,9 +21,9 @@ const App = ({children}) => {
             <BrowserRouter>
               <MainLayout>
                 <Switch>
-                  <Route exact path='/' component={MainPage} />
-                  <Route exact path='/AddNew' component={AddNew} />
-                  <Route exact path='/:id' component={Details} />
+                  <Route exact path='/' component={() => <MainPage/>} />
+                  <Route exact path='/AddNew' component={() => <AddNew/>} />
+                  <Route exact path='/todo/:id' component={() => <Details/>} />
                 </Switch>
               </MainLayout>
             </BrowserRouter>

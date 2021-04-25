@@ -5,12 +5,13 @@ import PropTypes from 'prop-types';
 
 import { Box, Button, Label, Input, Container, Text } from 'theme-ui';
 import { Link } from 'react-router-dom';
+import { todosState } from '../../../atoms';
 
-const Details = (todos) => {
+const Details = (item) => {
 
-  // const { todos } = this.props;
+  // const { item } = props;
 
-  console.log(`item`, todos);
+  console.log(`item`, this);
 
   return(
     <div
@@ -62,7 +63,7 @@ const Details = (todos) => {
               fontSize: 4,
               fontWeight: `bold`,
             }}>
-            {/* {item.title} */}
+            {/* {item.todos.title} */}
           </Text>
         </Box>
       </Container>
@@ -70,10 +71,10 @@ const Details = (todos) => {
   );
 };
 
-// Details.propTypes = {
-//   children: PropTypes.node,
-//   id: PropTypes.node,
-//   title: PropTypes.object,
-// };
+Details.propTypes = {
+  // children: PropTypes.node,
+  // id: PropTypes.node,
+  todos: PropTypes.any,
+};
 
 export default Details;

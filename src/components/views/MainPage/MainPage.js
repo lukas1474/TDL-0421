@@ -3,7 +3,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { useRecoilState, useRecoilValue, useSetRecoilState, atom } from 'recoil';
 
-import {  todosState } from '../../../atoms';
+import {  todosState  } from '../../../atoms';
 
 /** @jsxImportSource theme-ui */
 
@@ -24,6 +24,7 @@ const MainPage = () => {
   const setTodos = useSetRecoilState(todosState);
   const todos = useRecoilValue(todosState);
   const setTodoList = useSetRecoilState(todosState);
+  // const todo = useSetRecoilState(todosState);
 
   console.log(`lista`, todos);
 
@@ -32,17 +33,25 @@ const MainPage = () => {
       const result = await axios(
         `https://gorest.co.in/public-api/todos`,
       );
+
+      if(todos.data) {
+        console.log(`asdsds`, );
+        return null;
+      }
       setTodos(result.data);
-      // console.log(`result`, result.data);
+      console.log(`result`, todos.data);
     };
     getTodos();
-  }, []);
+  }, [todos]);
 
   const deleteTodo = (id) => {
     setTodoList((oldTodoList) => {
-      const newTodoList = oldTodoList.filter((todo, i) => {
-        return i !== id;
+
+      const newTodoList = oldTodoList.data.filter((index) => {
+
+        return id !== index.id;
       });
+      console.log(`usuwanie`, newTodoList);
       return newTodoList;
     });
   };
@@ -69,7 +78,10 @@ const MainPage = () => {
           justifyContent: `flex-end`,
         }}>
         <Link to='/AddNew'>
-          <Button variant='third'>
+          <Button
+            variant='third'
+            type='button'
+          >
             Dodaj
           </Button>
         </Link>
@@ -83,6 +95,7 @@ const MainPage = () => {
             alignItems: `center`,
             width: `1155px`,
             margin: `10px`,
+
           }}>
           < >
             <Box
@@ -93,7 +106,12 @@ const MainPage = () => {
                 <Checkbox defaultChecked={item.completed} />
               </Label>
             </Box>
-            <Link to={`/${item.id}`} >
+            <Link to={`/todo/${item.id}`}
+              sx={{
+                textDecoration: `none`,
+                color: `black`,
+              }}
+            >
               <Box
                 sx={{
                   width: `1000px`,
@@ -101,15 +119,18 @@ const MainPage = () => {
                 {item.title}
                 {/* {console.log(`todos tex`, todos.title)} */}
               </Box>
+              {/* {console.log(`item w propsie`, item)} */}
               {() => {
                 <Details
-                  todos={item}
-                  // {...todos}
-                  // {...item}
-                  // key={item.id}
-                  // title={item.title}
+                  // todos={item}
+                  item={item}
+                //   {...item}
+                //   key={item.id}
+                //   title={item.title}
                 />;
               }}
+
+
             </Link>
             <Box
               sx={{
