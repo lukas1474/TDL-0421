@@ -2,7 +2,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 
 /** @jsxImportSource theme-ui */
-import { Input, Label, Box, Grid, Container } from 'theme-ui';
+import { Label, Box, Grid, Container } from 'theme-ui';
 
 import { todosStats } from '../../../atoms';
 
@@ -17,13 +17,13 @@ const Summary = () => {
         flexDirection: `column`,
         alignItems: `center`,
         justifyContent: `center`,
+        fontFamily: `heading`,
       }}>
       <Label
         sx={{
           color: `text`,
           marginBottom: `5px`,
           marginLeft: `10px`,
-          fontFamily: `heading`,
           fontSize: `20px`,
         }}
       >

@@ -51,12 +51,12 @@ const MainPage = () => {
         fontSize: `calc(10px + 2vmin)`,
         color: `black`,
         padding: `25px`,
-        minHeight: `80vh`,
+        minHeight: `82vh`,
         fontFamily: `body`,
       }}>
       <Box
         sx={{
-          width: `1500px`,
+          width: `1600px`,
           display: `flex`,
           justifyContent: `flex-end`,
         }}>
@@ -73,19 +73,25 @@ const MainPage = () => {
         <Grid
           key={item.id}
           sx={{
-            backgroundColor: item.completed ? `white` : `muted`,
+            boxShadow: item.completed ? `none` : `-7px 7px 9px -3px rgba(204,204,204,0.5)`,
+            backgroundColor: item.completed ? `backgroundList` : `muted`,
             display: `flex`,
             alignItems: `center`,
-            width: `1155px`,
-            margin: `10px`,
+            width: `1255px`,
+            height: `auto`,
+            margin: `15px`,
           }}>
           < >
             <Box
               sx={{
                 width: `25px`,
+                marginLeft: `10px`,
               }}>
               <Label>
                 <Checkbox
+                  sx={{
+                    color: `background`,
+                  }}
                   defaultChecked={item.completed}
                   onClick={() => {
                     finishTodo(item.id);
@@ -96,7 +102,7 @@ const MainPage = () => {
             <Link to={`/todo/${item.id}`}
               sx={{
                 textDecoration: item.completed ? `line-through` : `none`,
-                color: item.completed ? `red` : `black`,
+                color: item.completed ? `completedTodo` : `black`,
               }}
             >
               <Box
@@ -110,7 +116,8 @@ const MainPage = () => {
               sx={{
                 display: `flex`,
                 justifyContent: `flex-end`,
-                width: `130px`,
+                width: `180px`,
+                marginRight: `20px`,
               }}>
               <Button
                 variant='secondary'

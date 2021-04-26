@@ -3,7 +3,7 @@ import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 
 /** @jsxImportSource theme-ui */
-import { Box, Button, Label, Container, Textarea } from 'theme-ui';
+import { Box, Button, Text, Container, Textarea } from 'theme-ui';
 
 import {  titleState, todosState } from '../../../atoms';
 
@@ -45,6 +45,7 @@ const AddNew = () => {
         position: `center`,
         alignItems: `center`,
         fontSize: `calc(10px + 2vmin)`,
+        fontFamily: `body`,
         color: `black`,
         padding: `150px`,
         minHeight: `80vh`,
@@ -53,6 +54,7 @@ const AddNew = () => {
       <Container
         sx={{
           backgroundColor: `muted`,
+          boxShadow: `-7px 7px 9px -3px rgba(204,204,204,0.5)`,
           display: `flex`,
           flexDirection: `column`,
           position: `center`,
@@ -67,6 +69,8 @@ const AddNew = () => {
             display: `flex`,
             justifyContent: `flex-end`,
             marginTop: `25px`,
+            marginBottom: `20px`,
+            marginLeft: `65px`,
           }}>
           <Link to='/'>
             <Button
@@ -82,10 +86,13 @@ const AddNew = () => {
           sx={{
             marginBottom: `25px`,
           }}>
-          <Label>
-            Tytuł
-          </Label>
           <Textarea
+            sx={{
+              fontSize: `15px`,
+              width: `450px`,
+              height: `150px`,
+            }}
+            placeholder='Dodaj treść zadania'
             type='text'
             name='title'
             mb={3}
@@ -99,8 +106,15 @@ const AddNew = () => {
           >
             Dodaj
           </Button>
-          <p>{title.length}</p>
+
         </Box>
+        <Text
+          sx={{
+            fontSize: `15px`,
+            marginBottom: `10px`,
+          }}>
+          ilość znaków: {title.length}
+        </Text>
       </Container>
     </div>
   );

@@ -5,7 +5,7 @@ import { useParams } from "react-router-dom";
 import { Link } from 'react-router-dom';
 
 /** @jsxImportSource theme-ui */
-import { Box, Button, Container, Text } from 'theme-ui';
+import { Box, Button, Container, Paragraph } from 'theme-ui';
 
 import { todosState  } from '../../../atoms';
 
@@ -43,6 +43,7 @@ const Details = () => {
       <Container
         sx={{
           backgroundColor: `muted`,
+          boxShadow: `-7px 7px 9px -3px rgba(204,204,204,0.5)`,
           display: `flex`,
           flexDirection: `column`,
           position: `center`,
@@ -74,14 +75,19 @@ const Details = () => {
             width: `1050px`,
           }}
         >
-          <Text
+          <Paragraph
             sx={{
-              fontSize: 4,
-              fontWeight: `bold`,
-              width: `800px`,
+              fontSize: 5,
             }}>
             {filteredDetails.title}
-          </Text>
+          </Paragraph>
+          <Paragraph
+            sx={{
+              fontSize: 2,
+              marginTop: `10px`,
+            }}>
+            utworzono: {filteredDetails.created_at}
+          </Paragraph>
         </Box>
       </Container>
     </div>

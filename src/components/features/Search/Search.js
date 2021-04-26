@@ -2,7 +2,7 @@ import React from 'react';
 import { useRecoilState } from 'recoil';
 
 /** @jsxImportSource theme-ui */
-import { Input, Label, Box, Button } from 'theme-ui';
+import { Input, Container, Box, Button } from 'theme-ui';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
@@ -18,17 +18,7 @@ const Search = () => {
   };
 
   return(
-    <div>
-      <Label
-        sx={{
-          color: `text`,
-          marginBottom: `5px`,
-          marginLeft: `10px`,
-          fontFamily: `heading`,
-        }}
-      >
-      Wyszukaj
-      </Label>
+    <Container>
       <Box
         sx={{
           display: `flex`,
@@ -38,9 +28,10 @@ const Search = () => {
         }}
       >
         <Input
+          placeholder='Wyszukaj'
           type='text'
           name='search'
-          defaultValue=""
+          defaultValue=''
           onChange={onChange}
           sx={{
             backgroundColor: `backgroundInput`,
@@ -57,8 +48,7 @@ const Search = () => {
           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
         </Button>
       </Box>
-
-    </div>
+    </Container>
   );
 };
 

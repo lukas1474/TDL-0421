@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 
 /** @jsxImportSource theme-ui */
-import { Box, Button, Container, Textarea } from 'theme-ui';
+import { Box, Button, Container, Paragraph, Textarea } from 'theme-ui';
 
 import { todosState, editedTitleState  } from '../../../atoms';
 
@@ -32,7 +32,7 @@ const Edit = () => {
     setEditedTitle(event.target.value);
   };
 
-  const editTodoTitle = (oldTodoList) => {
+  const editTodoTitle = () => {
     setEditTodoList((oldTodoList) => {
       const newTodoList = oldTodoList.map((item) => {
         if(id == item.id) {
@@ -65,6 +65,7 @@ const Edit = () => {
       <Container
         sx={{
           backgroundColor: `muted`,
+          boxShadow: `-7px 7px 9px -3px rgba(204,204,204,0.5)`,
           display: `flex`,
           flexDirection: `column`,
           position: `center`,
@@ -79,7 +80,7 @@ const Edit = () => {
             display: `flex`,
             justifyContent: `flex-end`,
             marginTop: `25px`,
-            marginLeft: `120px`,
+            marginLeft: `70px`,
             marginBottom: `15px`,
           }}>
           <Link to='/'>
@@ -97,7 +98,9 @@ const Edit = () => {
           <Textarea
             id='textarea'
             sx={{
-              width: `500px`,
+              fontSize: `15px`,
+              width: `450px`,
+              height: `150px`,
               marginBottom: `15px`,
             }}
             defaultValue={editedTodo.title}
@@ -111,10 +114,16 @@ const Edit = () => {
             }}
             onClick={(event) => editTodoTitle(event)}
           >
-            Dodaj
+            Edytuj
           </Button>
-          <p>{editedTitle.length}</p>
         </Box>
+        <Paragraph
+          sx={{
+            fontSize: `15px`,
+            marginBottom: `10px`,
+          }}>
+          ilość znaków: {editedTitle.length}
+        </Paragraph>
       </Container>
     </div>
   );
