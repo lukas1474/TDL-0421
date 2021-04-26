@@ -41,54 +41,6 @@ const AddNew = () => {
     });
   };
 
-  // const addTodo = (event) => {
-  //   event.preventDefault();
-  // if (!title.length) return;
-  //   setTodoList((oldTodoList) => [
-
-  //     ...oldTodoList,
-  //     {
-  //       id: getId(),
-  //       title,
-  //       completed: false,
-  //     },
-
-
-  //   ]);
-  //   handleClose();
-  // };
-
-
-  // const addValue = () => {
-  //   setTitle(``);
-  //   updateTodo((oldList) => [
-  //     ...oldList,
-  //     {
-  //       id: getId(),
-  //       value: title,
-  //     },
-  //   ]);
-  //   console.log(`old list`, oldList);
-  // };
-
-
-  // const addTodo = () => {
-  //   setTodoList((oldTodoList) => [
-  //     ...oldTodoList,
-  //     {
-  //       id: getId(),
-  //       text: title,
-  //       completed: false,
-  //     },
-  //   ]);
-  //   setTitle(``);
-  // };
-
-  // const onChange = ({ target: {title} }) => {
-  //   setTitle(title);
-  //   console.log(`title`, title);
-  // };
-
   return(
     <div
       sx={{

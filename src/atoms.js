@@ -16,6 +16,11 @@ export const editedTitleState = atom({
   default: ``,
 });
 
+export const searchPhrase = atom({
+  key: `SearchPhrase`,
+  default: ``,
+});
+
 export const todosStats = selector({
   key: `todosStats`,
   get: ({get}) => {
@@ -26,5 +31,20 @@ export const todosStats = selector({
       all: todosId.length,
       completed: todosCom.length,
     };
+  },
+});
+
+export const filteredSearch = selector({
+  key: `filteredSearch`,
+  get: ({get}) => {
+    const todosId = get(todosState);
+    const todoSearch = get(searchPhrase);
+
+    if(todoSearch === ``) {
+      return todosId;
+    }
+    return todosId.filter((item) =>{
+      return item.title.includes(todoSearch);
+    });
   },
 });

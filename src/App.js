@@ -25,7 +25,7 @@ const App = ({children}) => {
                   <Route exact path='/' component={() => <MainPage/>} />
                   <Route exact path='/AddNew' component={() => <AddNew/>} />
                   <Route exact path='/todo/:id' component={() => <Details/>} />
-                  <Route exact path='/Edit/:id' component={() => <Edit />} />
+                  <Route exact path='/Edit/:id' component={() => <Edit/>} />
                 </Switch>
               </MainLayout>
             </BrowserRouter>

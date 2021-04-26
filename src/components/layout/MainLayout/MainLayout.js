@@ -7,7 +7,7 @@ import axios from 'axios';
 import Footer from '../Footer/Footer';
 import Header from '../Header/Header';
 
-import {  todosState, todosList  } from '../../../atoms';
+import {  todosState } from '../../../atoms';
 
 const MainLayout = ({children}) => {
 
@@ -16,7 +16,6 @@ const MainLayout = ({children}) => {
 
   useEffect( () => {
     if(todos.data) {
-      // console.log(`asdsds`, );
       return null;
     }
     const getTodos = async () => {
@@ -27,11 +26,9 @@ const MainLayout = ({children}) => {
       console.log(`result`, result);
       setTodos(result.data.data);
     };
-
     if(!todos.data) {
       getTodos();
     }
-
   }, []);
 
   return (

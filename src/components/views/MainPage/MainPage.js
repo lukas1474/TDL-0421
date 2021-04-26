@@ -10,43 +10,17 @@ import { Grid, Box, Button, Checkbox, Label } from 'theme-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import {  todosState, todosList, todosStats } from '../../../atoms';
+import {  todosState, todosList, todosStats, filteredSearch } from '../../../atoms';
 
 const MainPage = () => {
-  const setTodos = useSetRecoilState(todosState);
+
+  // const setTodos = useSetRecoilState(todosState);
   const todos = useRecoilValue(todosState);
+  const searchTodos = useRecoilValue(filteredSearch);
   const setTodoList = useSetRecoilState(todosState);
   const stats = useRecoilValue(todosStats);
 
   console.log(`lista`, todos);
-
-  // useEffect = () => {
-  //   const check = () => {
-  //     document.querySelectorAll().checked = true;
-  //   };
-  // };
-
-  // const checked = document.querySelectorAll(`input:checked`);
-  // console.log(`text inputs`, checked);
-
-  // useEffect( () => {
-  //   if(todos.data) {
-  //     // console.log(`asdsds`, );
-  //     return null;
-  //   }
-  //   const getTodos = async () => {
-  //     // console.log(`metoda getdos`);
-  //     const result = await axios(
-  //       `https://gorest.co.in/public-api/todos`,
-  //     );
-  //     setTodos(result.data);
-  //   };
-  //   // console.log(`result`, todos.data);
-  //   if(!todos.data) {
-  //     getTodos();
-  //   }
-
-  // }, []);
 
   const deleteTodo = (event, id) => {
     event.preventDefault();
@@ -107,7 +81,7 @@ const MainPage = () => {
           </Button>
         </Link>
       </Box>
-      {todos && todos.map(item => (
+      {searchTodos && searchTodos.map(item => (
         <Grid
           key={item.id}
           sx={{
