@@ -2,7 +2,6 @@ export default {
   fonts: {
     body: `system-ui, sans-serif`,
     heading: `"Avenir Next", sans-serif`,
-    monospace: `Menlo, monospace`,
   },
   colors: {
     text: `white`,
@@ -69,6 +68,12 @@ export default {
         borderColor: `background`,
         boxShadow: t => `0 0 0 2px ${t.colors.background}`,
         outline: `none`,
+      },
+    },
+    select: {
+      borderColor: `background`,
+      '&:focus': {
+        borderColor: `background`,
       },
     },
   },

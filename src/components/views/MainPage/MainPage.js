@@ -60,6 +60,11 @@ const MainPage = () => {
         fontFamily: `body`,
       }}>
       <Select
+        sx={{
+          width: `150px`,
+          fontFamily: `body`,
+          fontSize: `20px`,
+        }}
         defaultValue='Wszystkie'
         onChange={onChange}
       >
