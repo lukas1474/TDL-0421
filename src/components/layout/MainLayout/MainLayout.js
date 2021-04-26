@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import PropTypes from 'prop-types';
 
-import { useRecoilState, useRecoilValue, useSetRecoilState, atom } from 'recoil';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import axios from 'axios';
 
 import Footer from '../Footer/Footer';
@@ -19,11 +19,9 @@ const MainLayout = ({children}) => {
       return null;
     }
     const getTodos = async () => {
-      // console.log(`metoda getdos`);
       const result = await axios(
         `https://gorest.co.in/public-api/todos`,
       );
-      console.log(`result`, result);
       setTodos(result.data.data);
     };
     if(!todos.data) {

@@ -1,8 +1,6 @@
-import React, { useState, useEffect } from 'react';
-import { useRecoilState, useRecoilValue, useSetRecoilState, atom } from 'recoil';
+import React from 'react';
+import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
-
-import axios from 'axios';
 
 /** @jsxImportSource theme-ui */
 import { Grid, Box, Button, Checkbox, Label } from 'theme-ui';
@@ -10,17 +8,12 @@ import { Grid, Box, Button, Checkbox, Label } from 'theme-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import {  todosState, todosList, todosStats, filteredSearch } from '../../../atoms';
+import {  todosState, filteredSearch } from '../../../atoms';
 
 const MainPage = () => {
 
-  // const setTodos = useSetRecoilState(todosState);
-  const todos = useRecoilValue(todosState);
   const searchTodos = useRecoilValue(filteredSearch);
   const setTodoList = useSetRecoilState(todosState);
-  // const stats = useRecoilValue(todosStats);
-
-  console.log(`lista`, todos);
 
   const deleteTodo = (event, id) => {
     event.preventDefault();
@@ -28,16 +21,13 @@ const MainPage = () => {
       const newTodoList = oldTodoList.filter((index) => {
         return id !== index.id;
       });
-      console.log(`usuwanie`, newTodoList);
       return newTodoList;
     });
   };
 
-  const finishTodo = ( id) => {
-    // event.preventDefault();
+  const finishTodo = (id) => {
     setTodoList((oldTodoList) => {
       const newTodoList = oldTodoList.map((item) => {
-        console.log(`dane ze zemiany`, item);
         if(id == item.id ) {
           return {
             ...item,
@@ -47,11 +37,9 @@ const MainPage = () => {
           return item;
         }
       });
-      console.log(`zmiana stanu`, newTodoList);
       return newTodoList;
     });
   };
-  // console.log(`todos`, todos);
 
   return(
     <div
@@ -81,7 +69,7 @@ const MainPage = () => {
           </Button>
         </Link>
       </Box>
-      {searchTodos && searchTodos.map(item => (
+      { searchTodos && searchTodos.map(item => (
         <Grid
           key={item.id}
           sx={{
@@ -90,7 +78,6 @@ const MainPage = () => {
             alignItems: `center`,
             width: `1155px`,
             margin: `10px`,
-
           }}>
           < >
             <Box
@@ -161,8 +148,6 @@ const MainPage = () => {
           margin: `10px`,
         }}>
       </Grid>
-      {/* <p>{stats.completed}</p>
-      <p>{stats.all}</p> */}
     </div>
   );
 };

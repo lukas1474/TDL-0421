@@ -1,9 +1,9 @@
-import React, { useState }from 'react';
-import { useRecoilState, useSetRecoilState, atom, useRecoilValue } from 'recoil';
+import React from 'react';
+import { useRecoilState, useSetRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 
 /** @jsxImportSource theme-ui */
-import { Box, Button, Label, Input, Container } from 'theme-ui';
+import { Box, Button, Label, Container, Textarea } from 'theme-ui';
 
 import {  titleState, todosState } from '../../../atoms';
 
@@ -16,16 +16,12 @@ const AddNew = () => {
 
   const [title, setTitle] = useRecoilState(titleState);
   const setTodoList = useSetRecoilState(todosState);
-  const oldTodoList = useRecoilValue(todosState);
-  // const updateTodo = useSetRecoilState(todo);
 
   const onChange = (event) => {
     setTitle(event.target.value);
   };
-  {console.log(`stara lista`, oldTodoList);}
 
-  const addTodo = (oldTodoList) => {
-    // event.preventDefault();
+  const addTodo = () => {
     if (!title.length) return;
     setTodoList((oldTodoList) => {
       const newTodoList = [
@@ -36,7 +32,6 @@ const AddNew = () => {
           completed: false,
         },
       ];
-      console.log(`stara nowa lista`, newTodoList);
       return newTodoList;
     });
   };
@@ -84,19 +79,17 @@ const AddNew = () => {
         </Box>
         <Box
           as="form"
-          // onSubmit={AddTodo}
           sx={{
             marginBottom: `25px`,
           }}>
           <Label>
             Tytuł
           </Label>
-          <Input
+          <Textarea
             type='text'
             name='title'
             mb={3}
             value={title}
-            // onChange={event => setTitle(event.target.value)}
             onChange={onChange}
           />
           <Button
@@ -106,6 +99,7 @@ const AddNew = () => {
           >
             Dodaj
           </Button>
+          <p>{title.length}</p>
         </Box>
       </Container>
     </div>

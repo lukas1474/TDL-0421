@@ -1,11 +1,11 @@
 import React, { useState, useEffect }from 'react';
-import { useRecoilState, useSetRecoilState, atom, useRecoilValue } from 'recoil';
+import { useRecoilState, useSetRecoilState, useRecoilValue } from 'recoil';
 
 import { Link } from 'react-router-dom';
 import { useParams } from "react-router-dom";
 
 /** @jsxImportSource theme-ui */
-import { Box, Button, Label, Input, Container } from 'theme-ui';
+import { Box, Button, Container, Textarea } from 'theme-ui';
 
 import { todosState, editedTitleState  } from '../../../atoms';
 
@@ -18,7 +18,6 @@ const Edit = () => {
   const setEditTodoList = useSetRecoilState(todosState);
 
   const editTodo = (id, details) => {
-    console.log(`detials filter`, details);
     const edited = details && details.filter((detail) => {
       return detail.id == id;
     });
@@ -32,13 +31,10 @@ const Edit = () => {
   const onChange = (event) => {
     setEditedTitle(event.target.value);
   };
-  // {console.log(`stara lista`, oldTodoList);}
 
-  const editTodoTitle = ( oldTodoList) => {
-    // event.preventDefault();
+  const editTodoTitle = (oldTodoList) => {
     setEditTodoList((oldTodoList) => {
       const newTodoList = oldTodoList.map((item) => {
-        console.log(item);
         if(id == item.id) {
           return {
             ...item,
@@ -48,7 +44,6 @@ const Edit = () => {
           return item;
         }
       });
-      console.log(`nowa edytowana lisat`, newTodoList);
       return newTodoList;
     });
   };
@@ -99,15 +94,15 @@ const Edit = () => {
         <Box
           as="form"
         >
-          <Input
+          <Textarea
+            id='textarea'
             sx={{
               width: `500px`,
               marginBottom: `15px`,
             }}
             defaultValue={editedTodo.title}
             onChange={onChange}
-          >
-          </Input>
+          />
           <Button
             variant='third'
             type='button'
@@ -118,6 +113,7 @@ const Edit = () => {
           >
             Dodaj
           </Button>
+          <p>{editedTitle.length}</p>
         </Box>
       </Container>
     </div>

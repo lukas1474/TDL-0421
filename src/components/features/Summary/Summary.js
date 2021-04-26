@@ -2,7 +2,7 @@ import React from 'react';
 import { useRecoilValue } from 'recoil';
 
 /** @jsxImportSource theme-ui */
-import { Input, Label, Box, Button, Grid, Container } from 'theme-ui';
+import { Input, Label, Box, Grid, Container } from 'theme-ui';
 
 import { todosStats } from '../../../atoms';
 
@@ -47,6 +47,7 @@ const Summary = () => {
             zakończone: {stats.completed} / wszystkie: {stats.all}
           </Box>
         </Grid>
+        <p>{stats.title}</p>
       </Box>
     </Container>
   );

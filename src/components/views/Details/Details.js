@@ -15,11 +15,7 @@ const Details = () => {
   const details = useRecoilValue(todosState);
   const [filteredDetails, setFilteredDetails] = useState(``);
 
-  // console.log(`detials`, details);
-  // console.log(id);
-
   const detailsTodo = (id, details) => {
-    // console.log(`detials filter`, details);
     const filtered = details.filter((detail) => {
       return detail.id == id;
     });
@@ -29,9 +25,6 @@ const Details = () => {
   useEffect(() => {
     detailsTodo(id, details);
   }, []);
-
-  // console.log(`gotowe filtrowanie`, filteredDetails1);
-  // console.log(`item`, this);
 
   return(
     <div
