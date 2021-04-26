@@ -1,10 +1,10 @@
 import React, { useState }from 'react';
+import { useRecoilState, useSetRecoilState, atom, useRecoilValue } from 'recoil';
+import { Link } from 'react-router-dom';
 
 /** @jsxImportSource theme-ui */
-
 import { Box, Button, Label, Input, Container } from 'theme-ui';
-import { Link } from 'react-router-dom';
-import { useRecoilState, useSetRecoilState, atom, useRecoilValue } from 'recoil';
+
 import {  titleState, todosState } from '../../../atoms';
 
 let id = 0;
@@ -22,7 +22,7 @@ const AddNew = () => {
   const onChange = (event) => {
     setTitle(event.target.value);
   };
-  {console.log(`asd3eqw`, oldTodoList);}
+  {console.log(`stara lista`, oldTodoList);}
 
   const addTodo = (oldTodoList) => {
     // event.preventDefault();
@@ -36,7 +36,7 @@ const AddNew = () => {
           completed: false,
         },
       ];
-      console.log(`stara lista`, newTodoList);
+      console.log(`stara nowa lista`, newTodoList);
       return newTodoList;
     });
   };
@@ -91,7 +91,6 @@ const AddNew = () => {
 
   return(
     <div
-      // onSubmit={onSubmit}
       sx={{
         backgroundColor: `backgroundList`,
         display: `flex`,
@@ -131,7 +130,6 @@ const AddNew = () => {
             </Button>
           </Link>
         </Box>
-        {/* <form onSubmit={handleSubmit(onSubmit)}> */}
         <Box
           as="form"
           // onSubmit={AddTodo}
@@ -153,12 +151,10 @@ const AddNew = () => {
             variant='third'
             type='button'
             onClick={() => addTodo()}
-            // onClick={() => addValue()}
           >
             Dodaj
           </Button>
         </Box>
-        {/* </form> */}
       </Container>
     </div>
   );

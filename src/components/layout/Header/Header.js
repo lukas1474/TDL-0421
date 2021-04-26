@@ -1,9 +1,10 @@
 import React from 'react';
 
 /** @jsxImportSource theme-ui */
+import { Grid, Box } from 'theme-ui';
 
 import Search from '../../features/Search/Search';
-import { Grid, Box } from 'theme-ui';
+
 
 const Header = () => (
   <header

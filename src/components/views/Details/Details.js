@@ -1,17 +1,37 @@
-import React, { useState }from 'react';
-import PropTypes from 'prop-types';
+import React, { useEffect, useState }from 'react';
+import { useRecoilValue } from 'recoil';
+
+import { useParams } from "react-router-dom";
+import { Link } from 'react-router-dom';
 
 /** @jsxImportSource theme-ui */
+import { Box, Button, Container, Text } from 'theme-ui';
 
-import { Box, Button, Label, Input, Container, Text } from 'theme-ui';
-import { Link } from 'react-router-dom';
-import { todosState } from '../../../atoms';
+import { todosState  } from '../../../atoms';
 
-const Details = (item) => {
+const Details = () => {
 
-  // const { item } = props;
+  let { id } = useParams();
+  const details = useRecoilValue(todosState);
+  const [filteredDetails, setFilteredDetails] = useState(``);
 
-  console.log(`item`, this);
+  // console.log(`detials`, details);
+  // console.log(id);
+
+  const detailsTodo = (id, details) => {
+    // console.log(`detials filter`, details);
+    const filtered = details.data.filter((detail) => {
+      return detail.id == id;
+    });
+    setFilteredDetails(filtered[0]);
+  };
+
+  useEffect(() => {
+    detailsTodo(id, details);
+  }, []);
+
+  // console.log(`gotowe filtrowanie`, filteredDetails1);
+  // console.log(`item`, this);
 
   return(
     <div
@@ -34,7 +54,7 @@ const Details = (item) => {
           flexDirection: `column`,
           position: `center`,
           alignItems: `center`,
-          width: `500px`,
+          width: `1100px`,
           color: `black`,
           fontFamily: `body`,
         }}
@@ -45,6 +65,8 @@ const Details = (item) => {
             display: `flex`,
             justifyContent: `flex-end`,
             marginTop: `25px`,
+            marginBottom: `20px`,
+            marginLeft: `650px`,
           }}>
           <Link to='/'>
             <Button variant='primary'>
@@ -56,25 +78,21 @@ const Details = (item) => {
           as="form"
           sx={{
             marginBottom: `25px`,
+            width: `1050px`,
           }}
         >
           <Text
             sx={{
               fontSize: 4,
               fontWeight: `bold`,
+              width: `800px`,
             }}>
-            {/* {item.todos.title} */}
+            {filteredDetails.title}
           </Text>
         </Box>
       </Container>
     </div>
   );
-};
-
-Details.propTypes = {
-  // children: PropTypes.node,
-  // id: PropTypes.node,
-  todos: PropTypes.any,
 };
 
 export default Details;

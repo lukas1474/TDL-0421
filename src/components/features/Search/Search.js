@@ -1,8 +1,8 @@
 import React from 'react';
 
 /** @jsxImportSource theme-ui */
-
 import { Input, Label, Box, Button } from 'theme-ui';
+
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
@@ -33,7 +33,11 @@ const Search = () => (
           width: `250px`,
         }}>
       </Input>
-      <Button variant='fourth' mr={2}>
+      <Button
+        variant='fourth'
+        mr={2}
+        type='button'
+      >
         <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
       </Button>
     </Box>

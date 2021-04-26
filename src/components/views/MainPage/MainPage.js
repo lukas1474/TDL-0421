@@ -1,52 +1,48 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import PropTypes from 'prop-types';
+
 import { useRecoilState, useRecoilValue, useSetRecoilState, atom } from 'recoil';
-
-import {  todosState  } from '../../../atoms';
-
-/** @jsxImportSource theme-ui */
-
-import { Grid, Box, Button, Checkbox, Label } from 'theme-ui';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
 import { Link } from 'react-router-dom';
 
-import Details from '../Details/Details';
+import axios from 'axios';
 
-// const todosState = atom({
-//   key: `todos`,
-//   default: [],
-// });
+/** @jsxImportSource theme-ui */
+import { Grid, Box, Button, Checkbox, Label } from 'theme-ui';
+
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
+
+import {  todosState, todosList  } from '../../../atoms';
 
 const MainPage = () => {
   const setTodos = useSetRecoilState(todosState);
   const todos = useRecoilValue(todosState);
   const setTodoList = useSetRecoilState(todosState);
-  // const todo = useSetRecoilState(todosState);
 
   console.log(`lista`, todos);
 
   useEffect(async () => {
+    if(todos.data) {
+      console.log(`asdsds`, );
+      return null;
+    }
     const getTodos = async () => {
+      console.log(`metoda getdos`);
       const result = await axios(
         `https://gorest.co.in/public-api/todos`,
       );
-
-      if(todos.data) {
-        console.log(`asdsds`, );
-        return null;
-      }
       setTodos(result.data);
-      console.log(`result`, todos.data);
     };
-    getTodos();
+    console.log(`result`, todos.data);
+    if(!todos.data) {
+      getTodos();
+    }
+
   }, [todos]);
 
-  const deleteTodo = (id) => {
+  const deleteTodo = (event, id) => {
+    event.preventDefault();
     setTodoList((oldTodoList) => {
-
       const newTodoList = oldTodoList.data.filter((index) => {
 
         return id !== index.id;
@@ -117,20 +113,7 @@ const MainPage = () => {
                   width: `1000px`,
                 }}>
                 {item.title}
-                {/* {console.log(`todos tex`, todos.title)} */}
               </Box>
-              {/* {console.log(`item w propsie`, item)} */}
-              {() => {
-                <Details
-                  // todos={item}
-                  item={item}
-                //   {...item}
-                //   key={item.id}
-                //   title={item.title}
-                />;
-              }}
-
-
             </Link>
             <Box
               sx={{
@@ -138,12 +121,17 @@ const MainPage = () => {
                 justifyContent: `flex-end`,
                 width: `130px`,
               }}>
-              <Button variant='secondary' mr={2}>
+              <Button
+                variant='secondary'
+                type='button'
+                mr={2}
+              >
                 <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
               </Button>
               <Button
                 variant='primary'
-                onClick={() => deleteTodo(item.id)}
+                type='button'
+                onClick={(event) => deleteTodo(event, item.id)}
               >
                 <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
               </Button>
