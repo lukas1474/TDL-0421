@@ -99,14 +99,15 @@ const AddNew = () => {
             value={title}
             onChange={onChange}
           />
-          <Button
-            variant='third'
-            type='button'
-            onClick={() => addTodo()}
-          >
+          <Link to='/'>
+            <Button
+              variant='third'
+              type='button'
+              onClick={() => addTodo()}
+            >
             Dodaj
-          </Button>
-
+            </Button>
+          </Link>
         </Box>
         <Text
           sx={{

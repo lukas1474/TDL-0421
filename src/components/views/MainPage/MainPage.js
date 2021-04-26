@@ -153,7 +153,7 @@ const MainPage = () => {
               <Button
                 variant='primary'
                 type='button'
-                onClick={(event) => deleteTodo(event, item.id)}
+                onClick={(event) => window.confirm(`Czy chcesz usunąć to zadanie?`) && deleteTodo(event, item.id)}
               >
                 <FontAwesomeIcon icon={faTrashAlt}></FontAwesomeIcon>
               </Button>

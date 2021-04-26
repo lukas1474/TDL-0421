@@ -106,16 +106,18 @@ const Edit = () => {
             defaultValue={editedTodo.title}
             onChange={onChange}
           />
-          <Button
-            variant='third'
-            type='button'
-            sx={{
-              marginBottom: `25px`,
-            }}
-            onClick={(event) => editTodoTitle(event)}
-          >
+          <Link to='/'>
+            <Button
+              variant='third'
+              type='button'
+              sx={{
+                marginBottom: `25px`,
+              }}
+              onClick={(event) => window.confirm(`Zmienić treść zadania?`) && editTodoTitle(event)}
+            >
             Edytuj
-          </Button>
+            </Button>
+          </Link>
         </Box>
         <Paragraph
           sx={{
