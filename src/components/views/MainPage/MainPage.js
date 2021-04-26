@@ -10,12 +10,13 @@ import { Grid, Box, Button, Checkbox, Label } from 'theme-ui';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import {  todosState, todosList  } from '../../../atoms';
+import {  todosState, todosList, todosStats } from '../../../atoms';
 
 const MainPage = () => {
   const setTodos = useSetRecoilState(todosState);
   const todos = useRecoilValue(todosState);
   const setTodoList = useSetRecoilState(todosState);
+  const stats = useRecoilValue(todosStats);
 
   console.log(`lista`, todos);
 
@@ -28,29 +29,29 @@ const MainPage = () => {
   // const checked = document.querySelectorAll(`input:checked`);
   // console.log(`text inputs`, checked);
 
-  useEffect(async () => {
-    if(todos.data) {
-      // console.log(`asdsds`, );
-      return null;
-    }
-    const getTodos = async () => {
-      // console.log(`metoda getdos`);
-      const result = await axios(
-        `https://gorest.co.in/public-api/todos`,
-      );
-      setTodos(result.data);
-    };
-    // console.log(`result`, todos.data);
-    if(!todos.data) {
-      getTodos();
-    }
+  // useEffect( () => {
+  //   if(todos.data) {
+  //     // console.log(`asdsds`, );
+  //     return null;
+  //   }
+  //   const getTodos = async () => {
+  //     // console.log(`metoda getdos`);
+  //     const result = await axios(
+  //       `https://gorest.co.in/public-api/todos`,
+  //     );
+  //     setTodos(result.data);
+  //   };
+  //   // console.log(`result`, todos.data);
+  //   if(!todos.data) {
+  //     getTodos();
+  //   }
 
-  }, [todos]);
+  // }, []);
 
   const deleteTodo = (event, id) => {
     event.preventDefault();
     setTodoList((oldTodoList) => {
-      const newTodoList = oldTodoList.data.filter((index) => {
+      const newTodoList = oldTodoList.filter((index) => {
         return id !== index.id;
       });
       console.log(`usuwanie`, newTodoList);
@@ -58,10 +59,10 @@ const MainPage = () => {
     });
   };
 
-  const finishTodo = (event, id) => {
-    event.preventDefault();
+  const finishTodo = ( id) => {
+    // event.preventDefault();
     setTodoList((oldTodoList) => {
-      const newTodoList = oldTodoList.data.map((item) => {
+      const newTodoList = oldTodoList.map((item) => {
         console.log(`dane ze zemiany`, item);
         if(id == item.id ) {
           return {
@@ -106,11 +107,11 @@ const MainPage = () => {
           </Button>
         </Link>
       </Box>
-      {todos.data && todos.data.map(item => (
+      {todos && todos.map(item => (
         <Grid
           key={item.id}
           sx={{
-            backgroundColor: `muted`,
+            backgroundColor: item.completed ? `white` : `muted`,
             display: `flex`,
             alignItems: `center`,
             width: `1155px`,
@@ -125,16 +126,16 @@ const MainPage = () => {
               <Label>
                 <Checkbox
                   defaultChecked={item.completed}
-                  onChange={(event) => {
-                    finishTodo(event, item.id);
+                  onClick={() => {
+                    finishTodo(item.id);
                   }}
                 />
               </Label>
             </Box>
             <Link to={`/todo/${item.id}`}
               sx={{
-                textDecoration: `none`,
-                color: `black`,
+                textDecoration: item.completed ? `line-through` : `none`,
+                color: item.completed ? `red` : `black`,
               }}
             >
               <Box
@@ -186,6 +187,8 @@ const MainPage = () => {
           margin: `10px`,
         }}>
       </Grid>
+      <p>{stats.completed}</p>
+      <p>{stats.all}</p>
     </div>
   );
 };

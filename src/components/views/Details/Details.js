@@ -20,7 +20,7 @@ const Details = () => {
 
   const detailsTodo = (id, details) => {
     // console.log(`detials filter`, details);
-    const filtered = details.data.filter((detail) => {
+    const filtered = details.filter((detail) => {
       return detail.id == id;
     });
     setFilteredDetails(filtered[0]);

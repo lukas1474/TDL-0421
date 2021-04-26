@@ -22,14 +22,14 @@ const AddNew = () => {
   const onChange = (event) => {
     setTitle(event.target.value);
   };
-  // {console.log(`stara lista`, oldTodoList);}
+  {console.log(`stara lista`, oldTodoList);}
 
   const addTodo = (oldTodoList) => {
     // event.preventDefault();
     if (!title.length) return;
     setTodoList((oldTodoList) => {
       const newTodoList = [
-        ...oldTodoList.data,
+        ...oldTodoList,
         {
           id: getId(),
           title,

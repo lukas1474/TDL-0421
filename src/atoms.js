@@ -16,14 +16,15 @@ export const editedTitleState = atom({
   default: ``,
 });
 
-
-// export const todosList = selector({
-//   key: `todosList`,
-//   get: async () => {
-//     const response = await fetch(`https://gorest.co.in/public-api/todos`);
-//     const todo = await response.json();
-
-//     console.log(`selector todo list`, todo);
-//     return todo;
-//   },
-// });
+export const todosStats = selector({
+  key: `todosStats`,
+  get: ({get}) => {
+    const todosId = get(todosState);
+    const todosCom = todosId && todosId.filter(({completed}) => !!completed);
+    console.log(`todosId`, todosId);
+    return {
+      all: todosId.length,
+      completed: todosCom.length,
+    };
+  },
+});

@@ -19,7 +19,7 @@ const Edit = () => {
 
   const editTodo = (id, details) => {
     console.log(`detials filter`, details);
-    const edited = details.data && details.data.filter((detail) => {
+    const edited = details && details.filter((detail) => {
       return detail.id == id;
     });
     setEditedTodo(edited[0]);
@@ -37,7 +37,7 @@ const Edit = () => {
   const editTodoTitle = ( oldTodoList) => {
     // event.preventDefault();
     setEditTodoList((oldTodoList) => {
-      const newTodoList = oldTodoList.data.map((item) => {
+      const newTodoList = oldTodoList.map((item) => {
         console.log(item);
         if(id == item.id) {
           return {
