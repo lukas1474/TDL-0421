@@ -1,37 +1,20 @@
 import React from 'react';
+import { useRecoilState } from 'recoil';
 
 /** @jsxImportSource theme-ui */
 import { Input, Label, Box, Button } from 'theme-ui';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { useRecoilState, useSetRecoilState } from 'recoil';
 
-import { searchPhrase, todosState } from '../../../atoms';
-
+import { searchPhrase } from '../../../atoms';
 
 const Search = () => {
 
   const [searchTodo, setSetTodo] = useRecoilState(searchPhrase);
-  const setSearchTodo = useSetRecoilState(todosState);
 
   const onChange = (event) => {
     setSetTodo(event.target.value);
-  };
-
-  const addTodo = (oldTodoList) => {
-    // event.preventDefault();
-    if (!title.length) return;
-    setSearchTodo((oldTodoList) => {
-      const newTodoList = [
-        ...oldTodoList,
-        {
-          title,
-        },
-      ];
-      console.log(`wartość wyszukiwarki`, newTodoList);
-      return newTodoList;
-    });
   };
 
   return(
@@ -44,7 +27,8 @@ const Search = () => {
           fontFamily: `heading`,
         }}
       >
-      Wyszukaj</Label>
+      Wyszukaj
+      </Label>
       <Box
         sx={{
           display: `flex`,
@@ -69,7 +53,6 @@ const Search = () => {
           variant='fourth'
           mr={2}
           type='button'
-          onClick={() => SearchTodo()}
         >
           <FontAwesomeIcon icon={faSearch}></FontAwesomeIcon>
         </Button>

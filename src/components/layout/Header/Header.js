@@ -4,7 +4,7 @@ import React from 'react';
 import { Grid, Box } from 'theme-ui';
 
 import Search from '../../features/Search/Search';
-
+import Summary from '../../features/Summary/Summary';
 
 const Header = () => (
   <header
@@ -12,7 +12,6 @@ const Header = () => (
       backgroundColor: `background`,
       height: `12vh`,
       display: `flex`,
-      alignItems: `center`,
       justifyContent: `center`,
     }}>
     <Grid
@@ -21,8 +20,8 @@ const Header = () => (
       sx={{
         width: `1500px`,
         display: `flex`,
-        flexDirection: `flex-end`,
         alignItems: `center`,
+        justifyContent: `space-between`,
         margin: `10px`,
       }}>
       <Box>
@@ -31,13 +30,21 @@ const Header = () => (
       <Box>
         <h2
           sx={{
-            fontSize: `calc(15px + 2vmin)`,
+            fontSize: `calc(25px + 2vmin)`,
             color: `white`,
-            marginLeft: `300px`,
+            marginRight: `100px`,
             fontFamily: `heading`,
           }}>
           Lista TODO
         </h2>
+      </Box>
+      <Box
+        sx={{
+          display: `flex`,
+          justifyContent: `right`,
+        }}
+      >
+        <Summary />
       </Box>
     </Grid>
 

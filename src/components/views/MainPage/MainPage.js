@@ -18,7 +18,7 @@ const MainPage = () => {
   const todos = useRecoilValue(todosState);
   const searchTodos = useRecoilValue(filteredSearch);
   const setTodoList = useSetRecoilState(todosState);
-  const stats = useRecoilValue(todosStats);
+  // const stats = useRecoilValue(todosStats);
 
   console.log(`lista`, todos);
 
@@ -161,8 +161,8 @@ const MainPage = () => {
           margin: `10px`,
         }}>
       </Grid>
-      <p>{stats.completed}</p>
-      <p>{stats.all}</p>
+      {/* <p>{stats.completed}</p>
+      <p>{stats.all}</p> */}
     </div>
   );
 };
