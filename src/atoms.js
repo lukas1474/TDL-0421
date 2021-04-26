@@ -22,7 +22,7 @@ export const searchPhrase = atom({
 
 export const categoryState = atom({
   key: `categoryState`,
-  default: todosState,
+  default: `Wszystkie`,
 });
 
 export const todosStats = selector({
@@ -40,13 +40,27 @@ export const todosStats = selector({
 export const filteredSearch = selector({
   key: `filteredSearch`,
   get: ({get}) => {
-    const todosId = get(todosState);
+    const todosId = get(choosenCategory);
     const todoSearch = get(searchPhrase);
     if(todoSearch === ``) {
       return todosId;
     }
     return todosId.filter((item) =>{
-      return item.title.includes(todoSearch);
+      return item.title.toLowerCase().includes(todoSearch.toLowerCase());
     });
+  },
+});
+
+export const choosenCategory = selector({
+  key: `choosenCategory`,
+  get: ({get}) => {
+    const todos = get(todosState);
+    const category = get(categoryState);
+    if (category === `Aktywne`) {
+      return todos.filter(({completed}) => completed === false );
+    } else if(category === `Zakończone`) {
+      return todos.filter(({completed}) => completed === true );
+    }
+    return todos;
   },
 });

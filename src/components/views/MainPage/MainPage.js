@@ -3,17 +3,18 @@ import { useRecoilValue, useSetRecoilState } from 'recoil';
 import { Link } from 'react-router-dom';
 
 /** @jsxImportSource theme-ui */
-import { Grid, Box, Button, Checkbox, Label } from 'theme-ui';
+import { Grid, Box, Button, Checkbox, Label, Select } from 'theme-ui';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrashAlt, faEdit } from '@fortawesome/free-solid-svg-icons';
 
-import {  todosState, filteredSearch } from '../../../atoms';
+import {  todosState, filteredSearch, categoryState } from '../../../atoms';
 
 const MainPage = () => {
 
   const searchTodos = useRecoilValue(filteredSearch);
   const setTodoList = useSetRecoilState(todosState);
+  const setCategory = useSetRecoilState(categoryState);
 
   const deleteTodo = (event, id) => {
     event.preventDefault();
@@ -41,6 +42,10 @@ const MainPage = () => {
     });
   };
 
+  const onChange = (event) => {
+    setCategory(event.target.value);
+  };
+
   return(
     <div
       sx={{
@@ -54,9 +59,17 @@ const MainPage = () => {
         minHeight: `82vh`,
         fontFamily: `body`,
       }}>
+      <Select
+        defaultValue='Wszystkie'
+        onChange={onChange}
+      >
+        <option>Wszystkie</option>
+        <option>Aktywne</option>
+        <option>Zakończone</option>
+      </Select>
       <Box
         sx={{
-          width: `1600px`,
+          width: `1500px`,
           display: `flex`,
           justifyContent: `flex-end`,
         }}>
