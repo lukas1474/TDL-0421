@@ -10,6 +10,7 @@ import MainLayout from './components/layout/MainLayout/MainLayout';
 import MainPage from './components/views/MainPage/MainPage';
 import AddNew from './components/views/AddNew/AddNew';
 import Details from './components/views/Details/Details';
+import Edit from './components/views/Edit/Edit';
 
 
 const App = ({children}) => {
@@ -24,6 +25,7 @@ const App = ({children}) => {
                   <Route exact path='/' component={() => <MainPage/>} />
                   <Route exact path='/AddNew' component={() => <AddNew/>} />
                   <Route exact path='/todo/:id' component={() => <Details/>} />
+                  <Route exact path='/Edit/:id' component={() => <Edit />} />
                 </Switch>
               </MainLayout>
             </BrowserRouter>

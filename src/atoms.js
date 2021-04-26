@@ -4,11 +4,15 @@ export const todosState = atom({
   key: `todos`,
   default: [],
 });
-{console.log(`atom todo`, todosState);}
-
+// {console.log(`atom todo`, todosState);}
 
 export const titleState = atom({
   key: `titleState`,
+  default: ``,
+});
+
+export const editedTitleState = atom({
+  key: `editedTitleState`,
   default: ``,
 });
 

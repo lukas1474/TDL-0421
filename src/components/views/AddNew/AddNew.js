@@ -22,7 +22,7 @@ const AddNew = () => {
   const onChange = (event) => {
     setTitle(event.target.value);
   };
-  {console.log(`stara lista`, oldTodoList);}
+  // {console.log(`stara lista`, oldTodoList);}
 
   const addTodo = (oldTodoList) => {
     // event.preventDefault();

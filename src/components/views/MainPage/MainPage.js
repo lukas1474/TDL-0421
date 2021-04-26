@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
-
 import { useRecoilState, useRecoilValue, useSetRecoilState, atom } from 'recoil';
-
 import { Link } from 'react-router-dom';
 
 import axios from 'axios';
@@ -21,19 +19,28 @@ const MainPage = () => {
 
   console.log(`lista`, todos);
 
+  // useEffect = () => {
+  //   const check = () => {
+  //     document.querySelectorAll().checked = true;
+  //   };
+  // };
+
+  // const checked = document.querySelectorAll(`input:checked`);
+  // console.log(`text inputs`, checked);
+
   useEffect(async () => {
     if(todos.data) {
-      console.log(`asdsds`, );
+      // console.log(`asdsds`, );
       return null;
     }
     const getTodos = async () => {
-      console.log(`metoda getdos`);
+      // console.log(`metoda getdos`);
       const result = await axios(
         `https://gorest.co.in/public-api/todos`,
       );
       setTodos(result.data);
     };
-    console.log(`result`, todos.data);
+    // console.log(`result`, todos.data);
     if(!todos.data) {
       getTodos();
     }
@@ -44,7 +51,6 @@ const MainPage = () => {
     event.preventDefault();
     setTodoList((oldTodoList) => {
       const newTodoList = oldTodoList.data.filter((index) => {
-
         return id !== index.id;
       });
       console.log(`usuwanie`, newTodoList);
@@ -52,6 +58,24 @@ const MainPage = () => {
     });
   };
 
+  const finishTodo = (event, id) => {
+    event.preventDefault();
+    setTodoList((oldTodoList) => {
+      const newTodoList = oldTodoList.data.map((item) => {
+        console.log(`dane ze zemiany`, item);
+        if(id == item.id ) {
+          return {
+            ...item,
+            completed: !item.completed,
+          };
+        } else {
+          return item;
+        }
+      });
+      console.log(`zmiana stanu`, newTodoList);
+      return newTodoList;
+    });
+  };
   // console.log(`todos`, todos);
 
   return(
@@ -99,7 +123,12 @@ const MainPage = () => {
                 width: `25px`,
               }}>
               <Label>
-                <Checkbox defaultChecked={item.completed} />
+                <Checkbox
+                  defaultChecked={item.completed}
+                  onChange={(event) => {
+                    finishTodo(event, item.id);
+                  }}
+                />
               </Label>
             </Box>
             <Link to={`/todo/${item.id}`}
@@ -126,7 +155,13 @@ const MainPage = () => {
                 type='button'
                 mr={2}
               >
-                <FontAwesomeIcon icon={faEdit}></FontAwesomeIcon>
+                <Link to={`/Edit/${item.id}`}>
+                  <FontAwesomeIcon
+                    sx={{
+                      color: `white`,
+                    }}
+                    icon={faEdit}></FontAwesomeIcon>
+                </Link>
               </Button>
               <Button
                 variant='primary'
